@@ -22,6 +22,9 @@ module.exports = (send) => {
 
     send({ path: 'cat', args: hash, buffer: opts.buffer }, (err, stream) => {
       if (err) { return callback(err) }
+      if (stream instanceof Buffer || typeof stream === 'string') {
+        return callback(null, stream);
+      }
 
       stream.pipe(bl((err, data) => {
         if (err) { return callback(err) }
