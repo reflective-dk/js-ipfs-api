@@ -21,7 +21,12 @@ module.exports = (send) => {
 
     send({ path: 'cat', args: hash, buffer: opts.buffer }, (err, stream) => {
       if (err) { return pt.destroy(err) }
+      if (stream instanceof Buffer || typeof stream === 'string') {
+          pt.push(stream);
+          return pt.push(null);
+      }
 
+        console.log('stream', stream);
       pump(stream, pt)
     })
 
