@@ -26,7 +26,6 @@ module.exports = (send) => {
           return pt.push(null);
       }
 
-        console.log('stream', stream);
       pump(stream, pt)
     })
 
